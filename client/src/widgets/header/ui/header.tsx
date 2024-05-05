@@ -1,8 +1,7 @@
-import { AuthButton } from '@/features/authentication'
+import { ToggleThemeButton } from '@/features/toggle-theme'
 import Logo from '/logo.svg'
-import { SearchBar } from '@/features/header/search'
-import { ToggleThemeButton } from '@/features/header/toggle-theme'
 import { Link } from '@tanstack/react-router'
+import { SearchBar } from '@/features/search'
 
 export function Header() {
 	return (
@@ -12,10 +11,7 @@ export function Header() {
 				<h1 className='text-2xl font-bold'>Издательский учет</h1>
 			</Link>
 			<div className='flex items-center justify-center md:gap-4'>
-				<div className='flex justify-end'>
-					<SearchBar className='hidden sm:flex' variant='hideable' />
-					<AuthButton />
-				</div>
+				<SearchBar className='hidden sm:flex' variant='hideable' />
 				<ToggleThemeButton />
 			</div>
 		</header>

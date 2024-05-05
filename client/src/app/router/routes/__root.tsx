@@ -1,6 +1,6 @@
-import { Root } from '@/pages/root'
+import { GuestPage } from '@/pages/guest'
 import { createRootRoute } from '@tanstack/react-router'
 
 export const Route = createRootRoute({
-	component: Root,
+	component: GuestPage,
 })

@@ -1,11 +1,11 @@
 import express from 'express'
-import { authentication } from './auth'
-import { users } from './users'
+import { authRouter } from './auth.router'
+import { roleRouter } from './role.router'
 
 const router = express.Router()
 
 export default (): express.Router => {
-	authentication(router)
-	users(router)
+	authRouter(router)
+	roleRouter(router)
 	return router
 }

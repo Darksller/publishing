@@ -21,10 +21,9 @@ app.use(
 app.use(compression())
 app.use(cookieParser())
 app.use(bodyParser.json())
+app.use('/', router())
 
 const server = http.createServer(app)
-
-app.use('/', router())
 
 server.listen(process.env.PORT, () => {
 	console.log(

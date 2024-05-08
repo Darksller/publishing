@@ -23,6 +23,7 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@reduxjs/toolkit": "^2.2.3",
     "@tanstack/react-router": "^1.31.15",
+    "@tanstack/react-table": "^8.16.0",
     "@tanstack/router-vite-plugin": "^1.30.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",

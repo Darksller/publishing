@@ -1,4 +1,4 @@
-import { AuthButton } from '@/features/authentication'
+import { AuthButton } from '@/features/auth'
 import { ToggleThemeButton } from '@/features/toggle-theme'
 import { AuroraBackground } from '@/shared/ui/aurora-background'
 import { Link } from '@tanstack/react-router'

@@ -31,7 +31,7 @@ export const Root = () => {
 		fetchMeAsync()
 	}, [])
 
-	if (!viewer.isAuthenticated) return <GuestPage />
+	if (viewer.isAuthenticated) return <GuestPage />
 	return (
 		<div className='font-inter'>
 			<Headroom className='mt-1'>

@@ -16,10 +16,14 @@ import {
 	FormSuccess,
 	Input,
 } from '@/shared/ui'
+import { useLoginMutation, signIn } from '@/entities/viewer'
+import { useDispatch } from 'react-redux'
 
 export function SignInForm() {
 	const [error, setError] = useState<string | undefined>('')
 	const [success, setSuccess] = useState<string | undefined>('')
+	const [login, isLoading] = useLoginMutation()
+	const dispatch = useDispatch()
 
 	const form = useForm<z.infer<typeof SignInSchema>>({
 		resolver: zodResolver(SignInSchema),
@@ -28,14 +32,19 @@ export function SignInForm() {
 
 	const onSubmit = async (values: z.infer<typeof SignInSchema>) => {
 		try {
-			// const response = await login(values).unwrap()
-			// setSuccess('Успешная авторизация!')
-			// signIn(response.accessToken, response.refreshToken)
+			const response = await login(values).unwrap()
+			setSuccess('Успешная авторизация!')
+			dispatch(
+				signIn({
+					accessToken: response.accessToken,
+					refreshToken: response.refreshToken,
+				})
+			)
 		} catch (error) {
 			setError(
 				error instanceof Error
 					? error.message
-					: (error as { data: string }).data
+					: (error as { data: string }).data ?? 'Повторите попытку позже'
 			)
 		}
 	}

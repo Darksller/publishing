@@ -1,5 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { getAuthCookie, getRefreshCookie, removeAuthCookies } from './authUtils'
+import {
+	getAuthCookie,
+	getRefreshCookie,
+	removeAuthCookies,
+	setAuthCookies,
+} from './authUtils'
 import { RootState } from '@/app/store'
 import type { ViewerPayload } from '../types/payload'
 
@@ -28,7 +33,7 @@ const viewerSlice = createSlice({
 			state.accessToken = ''
 			state.user = null
 		},
-		login(
+		signIn(
 			state,
 			{
 				payload,
@@ -37,6 +42,7 @@ const viewerSlice = createSlice({
 				accessToken: string
 			}>
 		) {
+			setAuthCookies(payload.accessToken, payload.refreshToken)
 			state.refreshToken = payload.refreshToken
 			state.accessToken = payload.accessToken
 			state.isAuthenticated = true
@@ -54,8 +60,8 @@ const viewerSlice = createSlice({
 	},
 })
 
-export const { logout, login, setViewer } = viewerSlice.actions
-export const viewer = viewerSlice.reducer
+export const { logout, signIn, setViewer } = viewerSlice.actions
+export const viewerReducer = viewerSlice.reducer
 
 export const selectIsAuthenticated = (state: RootState) =>
 	state.viewer.isAuthenticated

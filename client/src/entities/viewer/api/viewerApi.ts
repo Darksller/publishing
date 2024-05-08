@@ -1,4 +1,4 @@
-import { ViewerPayload } from '../types/payload'
+import { TokenPayload, ViewerPayload } from '../types/payload'
 import { api } from '@/shared/api'
 
 export const viewerApi = api.injectEndpoints({
@@ -27,7 +27,8 @@ export const viewerApi = api.injectEndpoints({
 			}),
 		}),
 
-		fetchMe: build.query<ViewerPayload, void>({
+		// Я отправляю два токена, на сервере проверяю аксес токен, если все ок - возвращаю токен и пользователя, если аксес токен сдох - проверяю рефреш токен и создаю аксес токен
+		fetchMe: build.query<{ viewer: ViewerPayload } & TokenPayload, void>({
 			query: () => '/users/fetchMe/',
 		}),
 	}),

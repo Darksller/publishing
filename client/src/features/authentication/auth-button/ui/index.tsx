@@ -1,26 +1,33 @@
 import {
-	Button,
 	Dialog,
 	DialogContent,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-	Separator,
 } from '@/shared/ui'
 import { SignInForm } from '../../sign-in-form'
+import { cn } from '@/shared/lib/utils'
 
-export const AuthButton = () => {
+type AuthButtonProps = {
+	className?: string
+}
+
+export const AuthButton = ({ className }: AuthButtonProps) => {
 	return (
 		<Dialog>
 			<DialogTrigger>
-				<Button className='group flex flex-col px-6 font-bold tracking-wide text-4xl py-8 justify-center w-full'>
+				<div
+					className={cn(
+						'justify-center w-full flex items-center align-middle',
+						className
+					)}
+				>
 					Войти в аккаунт
-					<Separator className='border-primary transition-all duration-300 group-hover:border-secondary border-2' />
-				</Button>
+				</div>
 			</DialogTrigger>
-			<DialogContent className='w-[500px] max-w-[97%] border-4'>
+			<DialogContent className='w-[400px] max-w-[97%] border-4'>
 				<DialogHeader>
-					<DialogTitle>Авторизация</DialogTitle>
+					<DialogTitle className='m-auto'>Авторизация</DialogTitle>
 				</DialogHeader>
 				<SignInForm />
 			</DialogContent>

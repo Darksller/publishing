@@ -1,5 +1,5 @@
 import { ToggleThemeButton } from '@/features/toggle-theme'
-import Logo from '/logo.svg'
+import Logo from '/logo.png'
 import { Link } from '@tanstack/react-router'
 import { SearchBar } from '@/features/search'
 

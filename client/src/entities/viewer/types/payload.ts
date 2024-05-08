@@ -1,6 +1,9 @@
 export type ViewerPayload = {
 	id: string
-	username: string
-	imageUrl: string
 	email: string
+}
+
+export type TokenPayload = {
+	accessToken: string
+	refreshToken: string
 }

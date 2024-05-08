@@ -1,4 +1,4 @@
-import { viewer } from '@/entities/viewer'
+import { viewerReducer } from '@/entities/viewer'
 import { api } from '@/shared/api'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
@@ -7,7 +7,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 export const store = configureStore({
 	reducer: {
 		[api.reducerPath]: api.reducer,
-		viewer,
+		viewer: viewerReducer,
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware().concat(api.middleware),

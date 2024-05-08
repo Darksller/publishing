@@ -36,22 +36,22 @@ export const GuestPage = () => {
 							<ToggleThemeButton />
 						</div>
 					</div>
-					<div className='grid sm:grid-cols-2 h-full px-4'>
-						<div className='flex flex-col justify-center gap-10 h-2/3 sm:px-12 font-bold'>
-							<div className='flex flex-col gap-2 text-6xl md:text-7xl xl:text-8xl 2xl:text-9xl'>
-								<div>Добро</div>
-								<div>Пожаловать.</div>
+
+					<div className='grid lg:grid-cols-2 h-full '>
+						<div className='flex flex-col justify-center gap-10 lg:h-2/3 sm:px-12 font-bold'>
+							<div className='z-10 text-6xl md:text-7xl xl:text-8xl 2xl:text-9xl max-lg:text-center'>
+								Добро Пожаловать.
 							</div>
-							<AuthButton />
+							<AuthButton className='font-bold tracking-wide text-4xl py-8 text-secondary bg-primary hover:bg-secondary hover:text-primary transition-all duration-700 ' />
 						</div>
 
-						<div className='md:bg-guest-page bg-cover flex justify-center items-center flex-col'>
-							<img src='logo.png' className='h-10 sm:h-16 pr-4' />
-							<div className='flex flex-col h-1/3 items-center'>
-								<div className='font-bold text-4xl bg-white/50 dark:bg-gray-600/20 backdrop-blur px-4 py-2 rounded-t-2xl'>
+						<div className='md:bg-guest-page bg-cover flex justify-center items-center flex-col mx-14'>
+							<img src='logo.png' className='h-10 sm:h-16' />
+							<div className='mx-8 flex flex-col h-2/5 items-center'>
+								<div className='font-bold text-4xl bg-white/90 dark:bg-gray-600/20 backdrop-blur px-4 py-2 rounded-t-2xl text-center'>
 									Учет учебно-методической литературы
 								</div>
-								<div className='mx-2 bg-white/50 dark:bg-gray-600/20 text-xl tracking-wider backdrop-blur px-1 py-2 rounded-2xl text-center'>
+								<div className=' bg-white/90 dark:bg-gray-600/20 text-xl tracking-wider backdrop-blur px-1 py-2 rounded-2xl text-center'>
 									Данный веб-сайт представляет собой интегрированную систему для
 									отслеживания и учета издания учебно-методической литературы в
 									университете имени П. О. Сухого. С его помощью можно легко

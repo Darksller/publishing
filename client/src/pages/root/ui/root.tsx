@@ -7,6 +7,7 @@ import { GuestPage } from '../../guest'
 import { useEffect } from 'react'
 import { useLazyFetchMeQuery } from '@/entities/viewer'
 import { signIn, setViewer } from '@/entities/viewer'
+import { Footer } from '@/widgets/footer/ui'
 
 export const Root = () => {
 	const { viewer } = useSelector((state: RootState) => state)
@@ -15,29 +16,29 @@ export const Root = () => {
 
 	useEffect(() => {
 		const fetchMeAsync = async () => {
-			try {
-				const response = await fetchMe().unwrap()
-				dispatch(
-					signIn({
-						refreshToken: response.refreshToken,
-						accessToken: response.accessToken,
-					})
-				)
-				dispatch(setViewer({ user: response.viewer }))
-			} catch (error) {
-				console.log(error)
-			}
+			const response = await fetchMe().unwrap()
+			console.log(response)
+			dispatch(
+				signIn({
+					refreshToken: response.refreshToken,
+					accessToken: response.accessToken,
+				})
+			)
+			dispatch(setViewer({ user: response.viewer }))
 		}
 		fetchMeAsync()
 	}, [])
 
-	if (viewer.isAuthenticated) return <GuestPage />
+	if (!viewer.isAuthenticated) return <GuestPage />
 	return (
-		<div className='font-inter'>
+		<div className='font-inter flex flex-col min-h-screen'>
 			<Headroom className='mt-1'>
 				<Header />
 			</Headroom>
-			<Outlet />
+			<div className='w-full mx-auto mt-4 max-w-[1440px] rounded-t-2xl sm:mt-12 border px-4 py-4 shadow-lg dark:shadow-secondary flex-grow'>
+				<Outlet />
+			</div>
+			<Footer />
 		</div>
 	)
 }

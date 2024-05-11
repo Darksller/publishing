@@ -1,9 +1,8 @@
 export type UserDTO = {
-	role: {
-		id: string
-		name: string
-	}
+	id: number
+	role: string
 	name: string
 	email: string
 	password: string
+	phoneNumber: string
 }

@@ -1,6 +1,13 @@
+import { viewerStateType } from '@/entities/viewer'
+import { Home } from '@/pages/home'
 import { Root } from '@/pages/root'
-import { createRootRoute } from '@tanstack/react-router'
+import { createRootRouteWithContext } from '@tanstack/react-router'
 
-export const Route = createRootRoute({
+type RouterContext = {
+	auth: viewerStateType
+}
+
+export const Route = createRootRouteWithContext<RouterContext>()({
 	component: Root,
+	notFoundComponent: Home,
 })

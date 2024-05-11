@@ -3,6 +3,7 @@ import Logo from '/logo.png'
 import { Link } from '@tanstack/react-router'
 import { SearchBar } from '@/features/search'
 import { NavPanel } from './nav-panel'
+import { SignOutButton } from '@/features/auth'
 
 export function Header() {
 	return (
@@ -14,6 +15,7 @@ export function Header() {
 			<NavPanel />
 			<div className='flex items-center justify-center md:gap-4'>
 				<SearchBar className='hidden sm:flex' variant='hideable' />
+				<SignOutButton />
 				<ToggleThemeButton />
 			</div>
 		</header>

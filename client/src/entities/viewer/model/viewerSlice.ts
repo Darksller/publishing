@@ -8,14 +8,14 @@ import {
 import { RootState } from '@/app/store'
 import type { ViewerPayload } from '../types/payload'
 
-type StateType = {
+export type viewerStateType = {
 	isAuthenticated: boolean
 	accessToken: string | undefined
 	refreshToken: string | undefined
 	user: ViewerPayload | null
 }
 
-const initialState: StateType = {
+const initialState: viewerStateType = {
 	isAuthenticated: !!getAuthCookie(),
 	accessToken: getAuthCookie(),
 	refreshToken: getRefreshCookie(),

@@ -4,6 +4,6 @@ import { baseQueryWithRetry } from './baseQuery'
 export const api = createApi({
 	reducerPath: 'splitApi',
 	baseQuery: baseQueryWithRetry,
-	tagTypes: ['viewer', 'role'],
+	tagTypes: ['viewer', 'role', 'user'],
 	endpoints: () => ({}),
 })

@@ -16,7 +16,7 @@ import {
 	FormSuccess,
 	Input,
 } from '@/shared/ui'
-import { useLoginMutation, signIn } from '@/entities/viewer'
+import { useLoginMutation, signIn, setViewer } from '@/entities/viewer'
 import { useDispatch } from 'react-redux'
 
 export function SignInForm() {
@@ -40,6 +40,7 @@ export function SignInForm() {
 					refreshToken: response.refreshToken,
 				})
 			)
+			dispatch(setViewer({ user: response.viewer }))
 		} catch (error) {
 			setError(
 				error instanceof Error

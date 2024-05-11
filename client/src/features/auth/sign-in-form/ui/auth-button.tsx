@@ -5,7 +5,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/shared/ui'
-import { SignInForm } from '../../sign-in-form'
+import { SignInForm } from '..'
 import { cn } from '@/shared/lib/utils'
 
 type AuthButtonProps = {
@@ -18,7 +18,7 @@ export const AuthButton = ({ className }: AuthButtonProps) => {
 			<DialogTrigger>
 				<div
 					className={cn(
-						'justify-center w-full flex items-center align-middle',
+						'justify-center w-full flex items-center align-middle rounded-3xl',
 						className
 					)}
 				>

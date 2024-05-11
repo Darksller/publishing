@@ -8,10 +8,13 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  name     String
-  password String
+  id            Int       @id @default(autoincrement())
+  email         String    @unique
+  name          String
+  password      String
+  phoneNumber   String
+  lastLoginDate DateTime?
+  createdAt     DateTime  @default(now())
 
   Token  Token?
   roleId Int
@@ -21,7 +24,7 @@ model User {
 model Token {
   refreshToken String
   userId       Int    @unique
-  Users        User   @relation(fields: [userId], references: [id])
+  Users        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId])
 }

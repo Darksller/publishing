@@ -104,6 +104,9 @@ importers:
       react-select:
         specifier: ^5.8.0
         version: 5.8.0(@types/react@18.2.75)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      reselect:
+        specifier: ^5.1.0
+        version: 5.1.0
       tailwind-merge:
         specifier: ^2.2.2
         version: 2.2.2

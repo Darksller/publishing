@@ -15,12 +15,11 @@ export const YearSelect = () => {
 	const [getPublications] = useLazyGetByYearQuery()
 	const dispatch = useDispatch()
 	const onValueChange = async (event: string) => {
-		dispatch(setYear(Number(event)))
 		try {
 			const response = await getPublications(event).unwrap()
-			console.log(response)
 			if (response) dispatch(set(response))
 			else dispatch(clear())
+			dispatch(setYear(Number(event)))
 		} catch (error) {
 			dispatch(clear())
 		}
@@ -29,12 +28,13 @@ export const YearSelect = () => {
 	const year = useSelector((state: RootState) => state.publication.year)
 	const currentYear = new Date().getFullYear()
 	const nextYear = currentYear + 1
-	const yearAfterNext = nextYear + 1
 	const uniqueYears = new Set(
-		data
-			? [...data, currentYear, nextYear, yearAfterNext]
-			: [currentYear, nextYear, yearAfterNext]
+		data ? [...data, currentYear, nextYear] : [currentYear, nextYear]
 	)
+
+	const lastYear = Math.max(...Array.from(uniqueYears))
+	const yearAfterLast = lastYear + 1
+	uniqueYears.add(yearAfterLast)
 
 	return (
 		<Select onValueChange={onValueChange} value={year?.toString()}>

@@ -11,7 +11,9 @@ import { Footer } from '@/widgets/footer/ui'
 import { Toaster } from '@/shared/ui/toaster'
 
 export const Root = () => {
-	const { viewer } = useSelector((state: RootState) => state)
+	const isAuthenticated = useSelector(
+		(state: RootState) => state.viewer.isAuthenticated
+	)
 	const [fetchMe] = useLazyFetchMeQuery()
 	const dispatch = useDispatch()
 
@@ -29,7 +31,7 @@ export const Root = () => {
 		fetchMeAsync()
 	}, [])
 
-	if (!viewer.isAuthenticated) return <GuestPage />
+	if (!isAuthenticated) return <GuestPage />
 	return (
 		<div className='font-inter flex flex-col min-h-screen'>
 			<Headroom className='mt-1'>

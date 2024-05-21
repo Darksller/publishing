@@ -14,6 +14,7 @@ import { RootState } from '@/app/store'
 import { Publication } from './publication'
 import { fromDbSelector } from '@/features/add-note/model/selectors'
 import { cn } from '@/shared/lib/utils'
+import { publicationsByDepartmentSelector } from '@/features/planning/department/model/selectors'
 
 type DepartmentProps = {
 	name: string
@@ -23,7 +24,7 @@ type DepartmentProps = {
 export const Department = ({ name, onRemove }: DepartmentProps) => {
 	const [isOpen, setIsOpen] = useState(true)
 	const publications = useSelector((state: RootState) =>
-		state.publication.publications.filter(item => item.department === name)
+		publicationsByDepartmentSelector(state, name)
 	)
 	const fromDb = useSelector(fromDbSelector)
 	return (

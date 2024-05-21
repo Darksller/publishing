@@ -8,21 +8,23 @@ type NavPanelProps = {
 	className?: string
 }
 export const NavPanel = ({ className }: NavPanelProps) => {
-	const { viewer } = useSelector((state: RootState) => state)
+	const role = useSelector((state: RootState) => state.viewer.user?.role.name)
 	return (
 		<div
 			className={cn(
-				'transition-all flex justify-center items-center gap-4',
+				'transition-all flex justify-center items-center gap-4 font-normal',
 				className
 			)}
 		>
-			{viewer.user?.role.name === Roles.ADMIN && (
+			<Link to={'/'} className='hover:text-primary/70 duration-300'>
+				Главная
+			</Link>
+			{role === Roles.ADMIN && (
 				<Link to={'/dashboard'} className='hover:text-primary/70 duration-300'>
 					Пользователи
 				</Link>
 			)}
-			{(viewer.user?.role.name === Roles.ED ||
-				viewer.user?.role.name === Roles.ADMIN) && (
+			{(role === Roles.ED || role === Roles.ADMIN) && (
 				<Link to={'/planning'} className='hover:text-primary/70 duration-300'>
 					Составление
 				</Link>

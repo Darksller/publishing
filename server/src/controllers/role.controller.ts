@@ -1,5 +1,5 @@
 import express from 'express'
-import { addNewRoles, getAllRoles } from '../services/role.service'
+import { getAllRoles } from '../services/role.service'
 
 export const getAll = async (req: express.Request, res: express.Response) => {
 	try {

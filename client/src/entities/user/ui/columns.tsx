@@ -4,6 +4,7 @@ import { ArrowUpIcon, GearIcon } from '@radix-ui/react-icons'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { DeleteButton } from './delete-button'
 import { Button } from '@/shared/ui'
+import { formatDateTime } from '@/shared/lib/time'
 
 const columnHelper = createColumnHelper<User>()
 
@@ -57,7 +58,7 @@ export const columns = [
 				</Button>
 			)
 		},
-		cell: data => <div className='pl-4'>{data.getValue()}</div>,
+		cell: ({ cell }) => <div className='pl-4'>{cell.getValue()}</div>,
 	}),
 	columnHelper.accessor('createdAt', {
 		header: ({ column }) => {
@@ -93,11 +94,8 @@ export const columns = [
 		},
 		cell: data => {
 			const value = data.getValue()
-			return (
-				<div className='pl-4'>
-					{value ? new Date(value).toLocaleDateString() : '-'}
-				</div>
-			)
+
+			return <div className='pl-4'>{value ? formatDateTime(value) : '-'}</div>
 		},
 	}),
 	columnHelper.display({

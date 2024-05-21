@@ -34,3 +34,78 @@ model Role {
   name String
   User User[]
 }
+
+model Plan {
+  id           Int           @id @default(autoincrement())
+  year         Int
+  Publications Publication[]
+}
+
+model Faculty {
+  id         Int          @id @default(autoincrement())
+  name       String
+  Department Department[]
+}
+
+model Department {
+  id          Int           @id @default(autoincrement())
+  name        String
+  faculty     Faculty       @relation(fields: [facultyId], references: [id])
+  facultyId   Int
+  Author      Author[]
+  Publication Publication[]
+}
+
+model Author {
+  id           Int           @id @default(autoincrement())
+  name         String
+  department   Department    @relation(fields: [departmentId], references: [id])
+  departmentId Int
+  Publication  Publication[]
+}
+
+model PubType {
+  id          Int           @id @default(autoincrement())
+  name        String
+  Publication Publication[]
+}
+
+model PubSubType {
+  id          Int           @id @default(autoincrement())
+  name        String
+  Publication Publication[]
+}
+
+model Speciality {
+  id          Int           @id @default(autoincrement())
+  name        String
+  code        String?
+  Publication Publication[]
+}
+
+model educationForm {
+  id          Int           @id @default(autoincrement())
+  name        String
+  Publication Publication[]
+}
+
+model Publication {
+  id              Int           @id @default(autoincrement())
+  dateAdded       String
+  name            String
+  pubTypeId       Int
+  PubType         PubType       @relation(fields: [pubTypeId], references: [id])
+  pubSubTypeId    Int
+  PubSubType      PubSubType    @relation(fields: [pubSubTypeId], references: [id])
+  specialityId    Int
+  Speciality      Speciality    @relation(fields: [specialityId], references: [id])
+  educationFormId Int
+  EducationForm   educationForm @relation(fields: [educationFormId], references: [id])
+  Authors         Author[]
+  plannedAmount   Int
+  plannedDueDate  String
+  departmentId    Int
+  Department      Department    @relation(fields: [departmentId], references: [id])
+  Plan            Plan          @relation(fields: [planId], references: [id])
+  planId          Int
+}

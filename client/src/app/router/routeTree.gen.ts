@@ -13,6 +13,8 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SuccessRouteImport } from './routes/success.route'
+import { Route as PlanningRouteImport } from './routes/planning.route'
 import { Route as DashboardRouteImport } from './routes/dashboard.route'
 
 // Create Virtual Routes
@@ -20,6 +22,16 @@ import { Route as DashboardRouteImport } from './routes/dashboard.route'
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const SuccessRouteRoute = SuccessRouteImport.update({
+  path: '/success',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PlanningRouteRoute = PlanningRouteImport.update({
+  path: '/planning',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const DashboardRouteRoute = DashboardRouteImport.update({
   path: '/dashboard',
@@ -43,6 +55,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRoute
     }
+    '/planning': {
+      preLoaderRoute: typeof PlanningRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/success': {
+      preLoaderRoute: typeof SuccessRouteImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -51,6 +71,8 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
   DashboardRouteRoute,
+  PlanningRouteRoute,
+  SuccessRouteRoute,
 ])
 
 /* prettier-ignore-end */

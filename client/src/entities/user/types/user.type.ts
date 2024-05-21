@@ -6,10 +6,12 @@ export type User = {
 	phoneNumber: string
 	lastLoginDate?: string
 	createdAt: string
-	role:
-		| string
-		| {
-				id: number
-				name: string
-		  }
+	role: {
+		id: number
+		name: string
+	}
+	faculty?: {
+		id: number
+		name: string
+	}
 }

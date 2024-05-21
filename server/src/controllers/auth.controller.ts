@@ -1,7 +1,7 @@
 import express from 'express'
 import { compare, generateSalt } from '../utils'
 import jwt, { JwtPayload } from 'jsonwebtoken'
-import { getUserByEmail } from '../services/user.service'
+import { getUserByEmail, updateLoginDate } from '../services/user.service'
 import { updateToken } from '../services/token.service'
 import status from 'http-status'
 import {
@@ -81,6 +81,7 @@ export const fetchMe = async (req: express.Request, res: express.Response) => {
 			const user = getVerifiedUser(refreshToken, process.env.REFRESH_SECRET!)
 			const dbUser = await getUserByEmail((user as JwtPayload).email)
 			if (!dbUser) return res.status(status.UNAUTHORIZED).json('UNAUTHORIZED')
+			await updateLoginDate(dbUser?.id)
 			const accessToken = generateAccessToken(dbUser)
 
 			return res.status(status.OK).json({

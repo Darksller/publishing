@@ -1,5 +1,6 @@
 import { RegButton } from '@/features/auth'
 import { UserTable } from '@/widgets/users-table/ui'
+
 export const Dashboard = () => {
 	return (
 		<div className='flex flex-col gap-4 '>

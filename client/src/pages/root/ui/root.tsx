@@ -8,6 +8,7 @@ import { useEffect } from 'react'
 import { useLazyFetchMeQuery } from '@/entities/viewer'
 import { signIn, setViewer } from '@/entities/viewer'
 import { Footer } from '@/widgets/footer/ui'
+import { Toaster } from '@/shared/ui/toaster'
 
 export const Root = () => {
 	const { viewer } = useSelector((state: RootState) => state)
@@ -17,7 +18,6 @@ export const Root = () => {
 	useEffect(() => {
 		const fetchMeAsync = async () => {
 			const response = await fetchMe().unwrap()
-			console.log(response)
 			dispatch(
 				signIn({
 					refreshToken: response.refreshToken,
@@ -39,6 +39,7 @@ export const Root = () => {
 				<Outlet />
 			</div>
 			<Footer />
+			<Toaster />
 		</div>
 	)
 }

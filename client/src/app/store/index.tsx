@@ -1,3 +1,4 @@
+import { publicationReducer } from '@/entities/publication/model/publicationSlice'
 import { viewerReducer } from '@/entities/viewer'
 import { api } from '@/shared/api'
 import { configureStore } from '@reduxjs/toolkit'
@@ -8,6 +9,7 @@ export const store = configureStore({
 	reducer: {
 		[api.reducerPath]: api.reducer,
 		viewer: viewerReducer,
+		publication: publicationReducer,
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware().concat(api.middleware),

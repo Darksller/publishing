@@ -12,13 +12,19 @@ export const NavPanel = ({ className }: NavPanelProps) => {
 	return (
 		<div
 			className={cn(
-				'transition-all flex justify-center items-center',
+				'transition-all flex justify-center items-center gap-4',
 				className
 			)}
 		>
 			{viewer.user?.role.name === Roles.ADMIN && (
 				<Link to={'/dashboard'} className='hover:text-primary/70 duration-300'>
 					Пользователи
+				</Link>
+			)}
+			{(viewer.user?.role.name === Roles.ED ||
+				viewer.user?.role.name === Roles.ADMIN) && (
+				<Link to={'/planning'} className='hover:text-primary/70 duration-300'>
+					Составление
 				</Link>
 			)}
 		</div>

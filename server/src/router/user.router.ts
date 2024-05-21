@@ -1,7 +1,7 @@
 import express from 'express'
 import { deleteEnd, getAll, update } from '../controllers/user.controller'
 import { register } from '../controllers/user.controller'
-import { isAdmin, isAuth } from '../middlewares'
+import { isAdmin } from '../middlewares'
 
 export const userRouter = (router: express.Router) => {
 	router.get('/user/getall', isAdmin, getAll)

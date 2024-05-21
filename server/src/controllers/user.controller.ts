@@ -41,6 +41,7 @@ export const register = async (req: express.Request, res: express.Response) => {
 			}
 		)
 		const newUser = await createUser(user)
+
 		await createToken(refreshToken, newUser.id)
 		return res.status(200).json(newUser).end()
 	} catch (error) {
@@ -63,7 +64,6 @@ export const update = async (req: express.Request, res: express.Response) => {
 			return res.status(400).json('Invalid data')
 
 		const updatedUser = await updateUser(user)
-
 		const refreshToken = jwt.sign(
 			{
 				random: generateSalt(),

@@ -29,13 +29,19 @@ export const isUserValid = (
 	secret: string,
 	cookieType: string
 ) => {
-	const token = validateToken(req, cookieType)
-	if (!token) {
+	try {
+		const token = validateToken(req, cookieType)
+
+		if (!token) {
+			return false
+		}
+		const user = getVerifiedUser(token, secret)
+
+		if (!user) {
+			return false
+		}
+		return true
+	} catch (error) {
 		return false
 	}
-	const user = getVerifiedUser(token, secret)
-	if (!user) {
-		return false
-	}
-	return true
 }

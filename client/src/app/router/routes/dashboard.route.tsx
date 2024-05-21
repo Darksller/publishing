@@ -4,8 +4,10 @@ import { createFileRoute, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/dashboard')({
 	component: Dashboard,
-	beforeLoad: ({ context }) => {
-		if (context.auth.user?.role.name !== Roles.ADMIN) {
+	beforeLoad: async ({ context }) => {
+		const response = await context.fetchMe()
+		const user = response.data.viewer
+		if (user?.role.name !== Roles.ADMIN) {
 			throw redirect({
 				to: '/',
 				search: {

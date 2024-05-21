@@ -40,10 +40,23 @@ export const updateUser = async (user: UserDTO) => {
 		include: { role: true, Token: true },
 	})
 }
+
+export const updateLoginDate = async (userId: number) => {
+	return await prisma.user.update({
+		where: { id: userId },
+		data: {
+			lastLoginDate: new Date(),
+		},
+		include: { role: true, Token: true },
+	})
+}
+
 export const deleteUser = async (user: UserDTO) => {
 	await prisma.user.delete({ where: { email: user.email } })
 }
 
 export const getAllUsers = async () => {
-	return await prisma.user.findMany({ include: { role: true } })
+	return await prisma.user.findMany({
+		include: { role: true },
+	})
 }

@@ -1,0 +1,10 @@
+-- DropForeignKey
+ALTER TABLE "Edit" DROP CONSTRAINT "Edit_editorId_fkey";
+
+-- AlterTable
+ALTER TABLE "Edit" ALTER COLUMN "editorId" DROP NOT NULL,
+ALTER COLUMN "startDate" SET DATA TYPE TEXT,
+ALTER COLUMN "finishDate" SET DATA TYPE TEXT;
+
+-- AddForeignKey
+ALTER TABLE "Edit" ADD CONSTRAINT "Edit_editorId_fkey" FOREIGN KEY ("editorId") REFERENCES "Editor"("id") ON DELETE SET NULL ON UPDATE CASCADE;

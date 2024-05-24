@@ -18,6 +18,24 @@ export const planApi = api.injectEndpoints({
 			string
 		>({
 			query: year => `/plan/get/${year}`,
+			providesTags: result =>
+				result
+					? [
+							...result.publications.map(({ id }) => ({
+								type: 'publication' as const,
+								id,
+							})),
+							'publication',
+						]
+					: ['publication'],
+		}),
+		updatePublication: build.mutation({
+			query: body => ({
+				url: '/plan/update',
+				method: 'PATCH',
+				body,
+			}),
+			invalidatesTags: ['publication'],
 		}),
 	}),
 })
@@ -26,4 +44,5 @@ export const {
 	useGetAllYearsQuery,
 	useCreatePlanMutation,
 	useLazyGetByYearQuery,
+	useUpdatePublicationMutation,
 } = planApi

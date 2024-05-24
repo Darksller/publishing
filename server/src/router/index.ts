@@ -10,6 +10,8 @@ import { specialityRouter } from './speciality.r'
 import { educationFormRouter } from './educationForm.r'
 import { authorRouter } from './author.r'
 import { planRouter } from './plan.router'
+import { markRouter } from './mark.r'
+import { editorRouter } from './editor.r'
 
 const router = express.Router()
 
@@ -23,7 +25,9 @@ export default (): express.Router => {
 	pubSubTypeRouter(router)
 	specialityRouter(router)
 	planRouter(router)
+	editorRouter(router)
 	educationFormRouter(router)
+	markRouter(router)
 	authorRouter(router)
 	return router
 }

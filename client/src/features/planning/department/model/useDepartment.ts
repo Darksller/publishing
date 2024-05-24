@@ -3,15 +3,15 @@ import { addDepartment, removeDepartment } from '@/entities/publication'
 import { useToast } from '@/shared/ui'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { getDepartmentsForFaculty } from './selectors'
 
 export const useDepartment = (faculty: string) => {
 	const { toast } = useToast()
 	const dispatch = useDispatch()
 	const [department, setDepartment] = useState<string>('')
-
 	const departments = useSelector((state: RootState) =>
-		state.publication.faculties.filter(item => item.name === faculty)
-	)[0].departments
+		getDepartmentsForFaculty(state, faculty)
+	)
 
 	const handleSetDepartment = (value: string) => {
 		setDepartment(value)

@@ -7,37 +7,32 @@ import {
 } from '@/shared/ui'
 import { useGetAllYearsQuery, useLazyGetByYearQuery } from '../api'
 import { useDispatch, useSelector } from 'react-redux'
-import { clear, set, setYear } from '@/entities/publication/'
 import { RootState } from '@/app/store'
+import { getUniqueYears, handleValueChange } from '../model/utils'
+import { useMemo } from 'react'
 
-export const YearSelect = () => {
+type YearSelectProps = {
+	toAdd?: boolean
+}
+
+export const YearSelect = ({ toAdd = true }: YearSelectProps) => {
 	const { data } = useGetAllYearsQuery()
 	const [getPublications] = useLazyGetByYearQuery()
 	const dispatch = useDispatch()
-	const onValueChange = async (event: string) => {
-		dispatch(setYear(Number(event)))
-		try {
-			const response = await getPublications(event).unwrap()
-			console.log(response)
-			if (response) dispatch(set(response))
-			else dispatch(clear())
-		} catch (error) {
-			dispatch(clear())
-		}
-	}
-
 	const year = useSelector((state: RootState) => state.publication.year)
-	const currentYear = new Date().getFullYear()
-	const nextYear = currentYear + 1
-	const yearAfterNext = nextYear + 1
-	const uniqueYears = new Set(
-		data
-			? [...data, currentYear, nextYear, yearAfterNext]
-			: [currentYear, nextYear, yearAfterNext]
+
+	const uniqueYears = useMemo(
+		() => getUniqueYears(data || [], toAdd, dispatch, getPublications),
+		[data, toAdd, dispatch, getPublications]
 	)
 
 	return (
-		<Select onValueChange={onValueChange} value={year?.toString()}>
+		<Select
+			onValueChange={event =>
+				handleValueChange(event, getPublications, dispatch)
+			}
+			value={year?.toString()}
+		>
 			<SelectTrigger className='w-[200px] text-md'>
 				<SelectValue placeholder='Выберите год' />
 			</SelectTrigger>

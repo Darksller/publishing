@@ -7,7 +7,7 @@ import { RootState } from './store'
 import { useLazyFetchMeQuery } from '@/entities/viewer'
 
 const App = () => {
-	const { viewer } = useSelector((state: RootState) => state)
+	const viewer = useSelector((state: RootState) => state.viewer)
 	const [fetchMe] = useLazyFetchMeQuery()
 	const dispatch = useDispatch()
 	return (

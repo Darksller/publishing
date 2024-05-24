@@ -14,6 +14,7 @@ import { RootState } from '@/app/store'
 import { Publication } from './publication'
 import { fromDbSelector } from '@/features/add-note/model/selectors'
 import { cn } from '@/shared/lib/utils'
+import { publicationsByDepartmentSelector } from '@/features/planning/department/model/selectors'
 
 type DepartmentProps = {
 	name: string
@@ -23,7 +24,7 @@ type DepartmentProps = {
 export const Department = ({ name, onRemove }: DepartmentProps) => {
 	const [isOpen, setIsOpen] = useState(true)
 	const publications = useSelector((state: RootState) =>
-		state.publication.publications.filter(item => item.department === name)
+		publicationsByDepartmentSelector(state, name)
 	)
 	const fromDb = useSelector(fromDbSelector)
 	return (
@@ -87,7 +88,7 @@ export const Department = ({ name, onRemove }: DepartmentProps) => {
 					<div className='border-2 shadow-md p-2 flex col-span-2'>
 						Полное наименование издания
 					</div>
-					<div className='border-2 shadow-md p-2 flex break-all col-span-3'>
+					<div className='border-2 shadow-md p-2 flex break-all col-span-2'>
 						Вид издания
 					</div>
 					<div className='border-2 shadow-md p-2 flex break-all col-span-2'>
@@ -98,6 +99,9 @@ export const Department = ({ name, onRemove }: DepartmentProps) => {
 					</div>
 					<div className='border-2 shadow-md p-2 flex break-all '>
 						Объем у.и.л
+					</div>
+					<div className='border-2 shadow-md p-2 flex break-all '>
+						Тираж, экз
 					</div>
 					<div className='border-2 shadow-md p-2 flex col-span-2 break-all'>
 						Срок сдачи

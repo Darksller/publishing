@@ -15,4 +15,5 @@ export const defaultValues = (
 	authors: publication?.authors || [],
 	department: department,
 	dateAdded: publication?.dateAdded || formatDateWithTime(new Date()),
+	copies: publication?.copies || 0,
 })

@@ -14,6 +14,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SuccessRouteImport } from './routes/success.route'
+import { Route as PlansRouteImport } from './routes/plans.route'
 import { Route as PlanningRouteImport } from './routes/planning.route'
 import { Route as DashboardRouteImport } from './routes/dashboard.route'
 
@@ -25,6 +26,11 @@ const IndexLazyImport = createFileRoute('/')()
 
 const SuccessRouteRoute = SuccessRouteImport.update({
   path: '/success',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PlansRouteRoute = PlansRouteImport.update({
+  path: '/plans',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -59,6 +65,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlanningRouteImport
       parentRoute: typeof rootRoute
     }
+    '/plans': {
+      preLoaderRoute: typeof PlansRouteImport
+      parentRoute: typeof rootRoute
+    }
     '/success': {
       preLoaderRoute: typeof SuccessRouteImport
       parentRoute: typeof rootRoute
@@ -72,6 +82,7 @@ export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
   DashboardRouteRoute,
   PlanningRouteRoute,
+  PlansRouteRoute,
   SuccessRouteRoute,
 ])
 

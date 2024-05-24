@@ -28,6 +28,7 @@ module.exports = {
 			},
 			backgroundImage: {
 				'guest-page': "url('@/shared/assets/images/guest-background.png')",
+				'main': "url('@/shared/assets/images/main.png')",
 			},
 			colors: {
 				border: 'hsl(var(--border))',

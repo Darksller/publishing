@@ -172,6 +172,24 @@ export function AddPublicationForm({ publication, department }: Props) {
 
 					<FormField
 						control={form.control}
+						name='copies'
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Тираж, экз</FormLabel>
+								<FormControl>
+									<Input
+										{...field}
+										type='number'
+										className='rounded-none text-md'
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+
+					<FormField
+						control={form.control}
 						name='authors'
 						render={({ field }) => (
 							<FormItem className='col-span-2'>

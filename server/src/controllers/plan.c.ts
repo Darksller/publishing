@@ -4,8 +4,8 @@ import {
 	getAllYearsService,
 	getService,
 } from '../services/plan.service'
-import { PublicationDto } from '../dto/publication.dto'
-import { addNewService } from '../services/publication.service'
+import { PublicationDto, PublicationUpdateDto } from '../dto/publication.dto'
+import { addNewService, updateService } from '../services/publication.service'
 import httpStatus from 'http-status'
 
 export const getAllYears = async (
@@ -44,6 +44,7 @@ export const get = async (req: express.Request, res: express.Response) => {
 		if (!data) return res.status(200).json(null).end()
 		const publicationsAsStrings = data.Publications.map(publication => {
 			return {
+				id: publication.id,
 				name: publication.name,
 				pubType: publication.PubType.name,
 				pubSubType: publication.PubSubType.name,
@@ -54,6 +55,19 @@ export const get = async (req: express.Request, res: express.Response) => {
 				plannedDueDate: publication.plannedDueDate,
 				department: publication.Department.name,
 				dateAdded: publication.dateAdded,
+				copies: publication.copies,
+				actualAmount: publication.actualAmount,
+				actualDueDate: publication.actualDueDate,
+				signatureDate: publication.signatureDate,
+				releaseDate: publication.releaseDate,
+				transferDate: publication.transferDate,
+				edit: {
+					editor: publication.Edit?.Editor?.name,
+					startDate: publication.Edit?.startDate,
+					finishDate: publication.Edit?.finishDate,
+				},
+				notes: publication.Notes.map(note => note.description),
+				mark: publication.Mark?.name,
 			}
 		})
 
@@ -77,5 +91,16 @@ export const get = async (req: express.Request, res: express.Response) => {
 	} catch (error) {
 		console.log(error)
 		return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR)
+	}
+}
+
+export const update = async (req: express.Request, res: express.Response) => {
+	try {
+		const data = req.body as PublicationUpdateDto
+		await updateService(data)
+		return res.status(200).json('success').end()
+	} catch (error) {
+		console.log(error)
+		return res.sendStatus(400)
 	}
 }

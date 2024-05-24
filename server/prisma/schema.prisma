@@ -108,4 +108,45 @@ model Publication {
   Department      Department    @relation(fields: [departmentId], references: [id])
   Plan            Plan          @relation(fields: [planId], references: [id])
   planId          Int
+  actualAmount    Int?
+  actualDueDate   String?
+  copies          Int
+  signatureDate   String?
+  releaseDate     String?
+  transferDate    String?
+
+  Edit  Edit?
+  Notes Note[]
+
+  markId Int?
+  Mark   Mark? @relation(fields: [markId], references: [id])
+}
+
+model Edit {
+  id            Int         @id @default(autoincrement())
+  Publication   Publication @relation(fields: [publicationId], references: [id])
+  publicationId Int         @unique
+  Editor        Editor?     @relation(fields: [editorId], references: [id])
+  editorId      Int?
+  startDate     String?
+  finishDate    String?
+}
+
+model Editor {
+  id   Int    @id @default(autoincrement())
+  name String
+  Edit Edit[]
+}
+
+model Mark {
+  id          Int           @id @default(autoincrement())
+  name        String
+  Publication Publication[]
+}
+
+model Note {
+  id            Int          @id @default(autoincrement())
+  description   String
+  Publication   Publication? @relation(fields: [publicationId], references: [id])
+  publicationId Int?
 }

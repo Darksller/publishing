@@ -88,7 +88,7 @@ export const Department = ({ name, onRemove }: DepartmentProps) => {
 					<div className='border-2 shadow-md p-2 flex col-span-2'>
 						Полное наименование издания
 					</div>
-					<div className='border-2 shadow-md p-2 flex break-all col-span-3'>
+					<div className='border-2 shadow-md p-2 flex break-all col-span-2'>
 						Вид издания
 					</div>
 					<div className='border-2 shadow-md p-2 flex break-all col-span-2'>
@@ -99,6 +99,9 @@ export const Department = ({ name, onRemove }: DepartmentProps) => {
 					</div>
 					<div className='border-2 shadow-md p-2 flex break-all '>
 						Объем у.и.л
+					</div>
+					<div className='border-2 shadow-md p-2 flex break-all '>
+						Тираж, экз
 					</div>
 					<div className='border-2 shadow-md p-2 flex col-span-2 break-all'>
 						Срок сдачи

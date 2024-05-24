@@ -48,3 +48,10 @@ export const formatDateWithTime = (date: Date) => {
 
 	return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`
 }
+
+export const getMonthYear = (dateStr: string) => {
+	const date = new Date(dateStr)
+	const month = date.toLocaleString('ru-RU', { month: 'long' })
+	const year = date.getFullYear()
+	return `${month}, ${year}`
+}

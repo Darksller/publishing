@@ -40,7 +40,7 @@ export const Publication = ({ data, className }: PublicationProps) => {
 			<div className='border-2 shadow-md p-2 flex col-span-2 break-all'>
 				{data.name}
 			</div>
-			<div className='border-2 shadow-md p-2 flex col-span-3 break-all'>
+			<div className='border-2 shadow-md p-2 flex col-span-2 break-all'>
 				{data.pubSubType}
 			</div>
 			<div className='border-2 shadow-md p-2 flex col-span-2'>
@@ -52,6 +52,7 @@ export const Publication = ({ data, className }: PublicationProps) => {
 			<div className='border-2 shadow-md p-2 flex break-all'>
 				{data.plannedAmount}
 			</div>
+			<div className='border-2 shadow-md p-2 flex break-all'>{data.copies}</div>
 			<div className='border-2 shadow-md p-2 flex break-all col-span-2'>
 				{getQuarter(data.plannedDueDate)}
 			</div>

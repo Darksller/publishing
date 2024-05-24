@@ -1,10 +1,24 @@
 import { ControllerRenderProps } from 'react-hook-form'
 import { useGetAuthorsByDepartmentQuery } from '../api'
 import Select from 'react-select'
-import { Publication } from '@/entities/publication'
 
 type Props = {
-	field: ControllerRenderProps<Publication, 'authors'>
+	field: ControllerRenderProps<
+		{
+			authors: string[]
+			name: string
+			pubType: string
+			pubSubType: string
+			speciality: string
+			educationForm: string
+			plannedAmount: number
+			plannedDueDate: string
+			department: string
+			dateAdded: string
+			copies: number
+		},
+		'authors'
+	>
 	department: string
 }
 export const AuthorMultiSelect = ({ field, department }: Props) => {

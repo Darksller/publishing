@@ -1,10 +1,10 @@
-import { FacultiesPayload, Publication } from '@/entities/publication'
 import { api } from '@/shared/api'
+import { FacultiesPayload, Publication } from '@/entities/publication'
 
 export const planApi = api.injectEndpoints({
 	endpoints: build => ({
 		getAllYears: build.query<number[], void>({
-			query: () => `/plan/getallYears`,
+			query: () => '/plan/getallYears',
 		}),
 		createPlan: build.mutation({
 			query: body => ({
@@ -29,6 +29,9 @@ export const planApi = api.injectEndpoints({
 						]
 					: ['publication'],
 		}),
+		getById: build.query<Publication, string>({
+			query: id => `/plan/getById/${id}`,
+		}),
 		updatePublication: build.mutation({
 			query: body => ({
 				url: '/plan/update',
@@ -45,4 +48,5 @@ export const {
 	useCreatePlanMutation,
 	useLazyGetByYearQuery,
 	useUpdatePublicationMutation,
+	useLazyGetByIdQuery,
 } = planApi

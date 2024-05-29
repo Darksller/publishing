@@ -1,7 +1,8 @@
 import express from 'express'
-import { isEdOrAdmin } from '../middlewares'
-import { getByDep } from '../controllers/author.c'
+import { isAuth, isEdOrAdmin } from '../middlewares'
+import { getByDep, getOverDueAuthors } from '../controllers/author.c'
 
 export const authorRouter = (router: express.Router) => {
+	router.get('/author/overdue', isAuth, getOverDueAuthors)
 	router.get('/author/:dep', isEdOrAdmin, getByDep)
 }

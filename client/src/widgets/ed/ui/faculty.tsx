@@ -29,6 +29,7 @@ export const Faculty = ({ name }: FacultyProps) => {
 		handleSetDepartment,
 	} = useDepartment(name)
 	const { handleRemoveFaculty } = useFaculty()
+
 	return (
 		<div className='border-2 px-4 py-4 shadow-md flex flex-col justify-center gap-4 border-black dark:border-white'>
 			<div className='flex justify-between items-center'>
@@ -62,22 +63,26 @@ export const Faculty = ({ name }: FacultyProps) => {
 				</div>
 			</div>
 
-			{isOpen && (
+			<div
+				className={`overflow-hidden transition-max-h duration-1000 ease-in-out max-h-[${isOpen ? '9999px' : '0px'}]`}
+			>
 				<div className='flex flex-col gap-4'>
-					<div className={cn('flex gap-4', fromDb && 'hidden')}>
-						<div className='border-2 px-4 py-4 shadow-md'>
-							<Button disabled={!department} onClick={handleAddDepartment}>
-								Добавить кафедру
-							</Button>
+					{!fromDb && (
+						<div className='flex gap-4'>
+							<div className='border-2 px-4 py-4 shadow-md'>
+								<Button disabled={!department} onClick={handleAddDepartment}>
+									Добавить кафедру
+								</Button>
+							</div>
+							<div className='border-2 px-4 py-4 shadow-md w-full'>
+								<DepartmentSelect
+									faculty={name}
+									onValueChange={handleSetDepartment}
+									defaultValue={department}
+								/>
+							</div>
 						</div>
-						<div className='border-2 px-4 py-4 shadow-md w-full'>
-							<DepartmentSelect
-								faculty={name}
-								onValueChange={handleSetDepartment}
-								defaultValue={department}
-							/>
-						</div>
-					</div>
+					)}
 
 					{departments.map((depName, index) => (
 						<Department
@@ -87,7 +92,7 @@ export const Faculty = ({ name }: FacultyProps) => {
 						/>
 					))}
 				</div>
-			)}
+			</div>
 		</div>
 	)
 }

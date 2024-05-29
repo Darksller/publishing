@@ -19,6 +19,7 @@ export const NavPanel = ({ className }: NavPanelProps) => {
 		...(role === Roles.ADMIN
 			? [{ to: '/dashboard', text: 'Пользователи' }]
 			: []),
+		{ to: '/stats', text: 'Статистика' },
 	]
 
 	return (

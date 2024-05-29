@@ -5,3 +5,9 @@ export type Author = {
 	name: string
 	department: Department
 }
+
+export type OverDueAuthor = {
+	authors: string[]
+	name: string
+	id: number
+}

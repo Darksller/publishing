@@ -1,6 +1,6 @@
 import { viewerStateType } from '@/entities/viewer'
 import { ViewerPayload } from '@/entities/viewer/types/payload'
-import { Home } from '@/pages/home'
+import { Plans } from '@/pages/plans'
 import { Root } from '@/pages/root'
 import { Dispatch, UnknownAction } from '@reduxjs/toolkit'
 import { createRootRouteWithContext } from '@tanstack/react-router'
@@ -15,5 +15,5 @@ type RouterContext = {
 
 export const Route = createRootRouteWithContext<RouterContext>()({
 	component: Root,
-	notFoundComponent: Home,
+	notFoundComponent: Plans,
 })

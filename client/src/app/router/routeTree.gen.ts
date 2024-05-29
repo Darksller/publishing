@@ -14,9 +14,12 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SuccessRouteImport } from './routes/success.route'
+import { Route as StatsRouteImport } from './routes/stats.route'
 import { Route as PlansRouteImport } from './routes/plans.route'
 import { Route as PlanningRouteImport } from './routes/planning.route'
 import { Route as DashboardRouteImport } from './routes/dashboard.route'
+import { Route as SearchSearchTextImport } from './routes/search/$searchText'
+import { Route as PublicationsPublicationIdImport } from './routes/publications/$publicationId'
 
 // Create Virtual Routes
 
@@ -26,6 +29,11 @@ const IndexLazyImport = createFileRoute('/')()
 
 const SuccessRouteRoute = SuccessRouteImport.update({
   path: '/success',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const StatsRouteRoute = StatsRouteImport.update({
+  path: '/stats',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -49,6 +57,16 @@ const IndexLazyRoute = IndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
+const SearchSearchTextRoute = SearchSearchTextImport.update({
+  path: '/search/$searchText',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PublicationsPublicationIdRoute = PublicationsPublicationIdImport.update({
+  path: '/publications/$publicationId',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -69,8 +87,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlansRouteImport
       parentRoute: typeof rootRoute
     }
+    '/stats': {
+      preLoaderRoute: typeof StatsRouteImport
+      parentRoute: typeof rootRoute
+    }
     '/success': {
       preLoaderRoute: typeof SuccessRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/publications/$publicationId': {
+      preLoaderRoute: typeof PublicationsPublicationIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/search/$searchText': {
+      preLoaderRoute: typeof SearchSearchTextImport
       parentRoute: typeof rootRoute
     }
   }
@@ -83,7 +113,10 @@ export const routeTree = rootRoute.addChildren([
   DashboardRouteRoute,
   PlanningRouteRoute,
   PlansRouteRoute,
+  StatsRouteRoute,
   SuccessRouteRoute,
+  PublicationsPublicationIdRoute,
+  SearchSearchTextRoute,
 ])
 
 /* prettier-ignore-end */

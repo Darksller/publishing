@@ -1,9 +1,12 @@
 import express from 'express'
-import { addNewService, getAllService } from '../services/speciality.service'
+import {
+	addNewService,
+	getAllSpecialities,
+} from '../services/speciality.service'
 
 export const getAll = async (req: express.Request, res: express.Response) => {
 	try {
-		const data = await getAllService()
+		const data = await getAllSpecialities()
 		return res.status(200).json(data).end()
 	} catch (error) {
 		console.log(error)

@@ -1,12 +1,16 @@
 import { api } from '@/shared/api'
-import { Author } from '../types'
+import { Author, OverDueAuthor } from '../types'
 
 export const authorApi = api.injectEndpoints({
 	endpoints: build => ({
 		getAuthorsByDepartment: build.query<Author[], string>({
 			query: department => `/author/${department}`,
 		}),
+		getOverdueAuthors: build.query<OverDueAuthor[], void>({
+			query: () => '/author/overdue',
+		}),
 	}),
 })
 
-export const { useGetAuthorsByDepartmentQuery } = authorApi
+export const { useGetAuthorsByDepartmentQuery, useGetOverdueAuthorsQuery } =
+	authorApi

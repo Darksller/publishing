@@ -5,6 +5,10 @@ export const getAllYearsService = async () => {
 	return plans.map(item => item.year)
 }
 
+export const getAllPlans = async () => {
+	return await prisma.plan.findMany({ include: { Publications: true } })
+}
+
 export const createPlan = async (year: number) => {
 	return await prisma.plan.create({ data: { year } })
 }

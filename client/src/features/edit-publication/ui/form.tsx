@@ -54,13 +54,18 @@ export const PublicationEditForm = ({ data }: PublicationProps) => {
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)}>
 				<div className='flex flex-col gap-4  p-4 '>
-					<div className='flex'>
+					<div className='flex gap-2'>
 						<div className='flex flex-col border py-1 gap-1 w-fit'>
 							<div className='px-2 font-bold'>Дата добавления</div>
 							<div className='border-2' />
 							<div className='px-2 text-center'>
 								{getCalendarDate(new Date(data.dateAdded))}
 							</div>
+						</div>
+						<div className='flex flex-col border py-1 gap-1 w-fit'>
+							<div className='px-2 font-bold'>Тип издания</div>
+							<div className='border-2' />
+							<div className='px-2 text-center'>{data.pubType}</div>
 						</div>
 						<Button
 							type='submit'

@@ -1,5 +1,8 @@
 import { AuthButton } from '@/features/auth'
 import { ToggleThemeButton } from '@/features/toggle-theme'
+import { PopoverWrapper } from '@/shared/ui/popover-wrapper'
+import { About } from '@/widgets/about'
+import { Contacts } from '@/widgets/contacts'
 import { Link } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
 
@@ -25,12 +28,22 @@ export const GuestPage = () => {
 						</div>
 					</Link>
 					<div className='flex sm:gap-6 sm:text-xl font-semibold tracking-widest uppercase'>
-						<Link className='hover:bg-primary hover:text-secondary transition-all duration-500 py-1 h-fit px-2 sm:px-4 border-primary rounded-2xl'>
-							О нас
-						</Link>
-						<Link className='hover:bg-primary hover:text-secondary transition-all duration-500 py-1 h-fit px-2 sm:px-4 border-primary rounded-2xl'>
-							Контакты
-						</Link>
+						<PopoverWrapper
+							trigger={
+								<div className='hover:bg-primary hover:text-secondary transition-all duration-500 py-1 h-fit px-2 sm:px-4 border-primary rounded-2xl cursor-pointer'>
+									О нас
+								</div>
+							}
+							content={<About />}
+						/>
+						<PopoverWrapper
+							trigger={
+								<div className='hover:bg-primary hover:text-secondary transition-all duration-500 py-1 h-fit px-2 sm:px-4 border-primary rounded-2xl cursor-pointer'>
+									Контакты
+								</div>
+							}
+							content={<Contacts />}
+						/>
 						<ToggleThemeButton />
 					</div>
 				</div>

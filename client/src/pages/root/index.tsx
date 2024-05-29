@@ -7,8 +7,8 @@ import { GuestPage } from '../guest'
 import { useEffect } from 'react'
 import { useLazyFetchMeQuery } from '@/entities/viewer'
 import { signIn, setViewer } from '@/entities/viewer'
-import { Footer } from '@/widgets/footer/ui'
 import { Toaster } from '@/shared/ui/toaster'
+import { OverdueBar } from '@/widgets/sidebar/overdue/ui'
 
 export const Root = () => {
 	const isAuthenticated = useSelector(
@@ -34,13 +34,15 @@ export const Root = () => {
 	if (!isAuthenticated) return <GuestPage />
 	return (
 		<div className='font-inter flex flex-col min-h-screen '>
-			<Headroom className='mt-1'>
+			<Headroom className='mt-1 '>
 				<Header />
 			</Headroom>
-			<div className='w-full mx-auto mt-4 max-w-[1440px] rounded-2xl sm:mt-12 border px-4 py-4 shadow-lg dark:shadow-secondary flex-grow'>
-				<Outlet />
+			<div className='flex flex-grow'>
+				<OverdueBar />
+				<div className='w-full mx-auto max-w-[1440px] rounded-2xl my-10 border px-4 py-4 shadow-lg dark:shadow-secondary flex-grow'>
+					<Outlet />
+				</div>
 			</div>
-			<Footer />
 			<Toaster />
 		</div>
 	)

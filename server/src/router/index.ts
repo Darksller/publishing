@@ -12,6 +12,7 @@ import { authorRouter } from './author.r'
 import { planRouter } from './plan.router'
 import { markRouter } from './mark.r'
 import { editorRouter } from './editor.r'
+import { searchRouter } from './search.r'
 
 const router = express.Router()
 
@@ -20,6 +21,7 @@ export default (): express.Router => {
 	roleRouter(router)
 	userRouter(router)
 	facultyRouter(router)
+	searchRouter(router)
 	departmentRouter(router)
 	pubTypeRouter(router)
 	pubSubTypeRouter(router)

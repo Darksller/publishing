@@ -10,11 +10,9 @@ export const getUniqueYears = (
 ) => {
 	const uniqueYears = new Set(data)
 	const currentYear = new Date().getFullYear()
-	const nextYear = currentYear + 1
 
 	if (toAdd) {
 		uniqueYears.add(currentYear)
-		uniqueYears.add(nextYear)
 		const lastYear = Math.max(...Array.from(uniqueYears))
 		const yearAfterLast = lastYear + 1
 		uniqueYears.add(yearAfterLast)

@@ -45,8 +45,43 @@ export const addNewService = async (
 	})
 }
 
-export const getAllService = async () => {
+export const getAllPublications = async () => {
 	return await prisma.publication.findMany()
+}
+
+export const searchPublications = async (searchText: string) => {
+	return await prisma.publication.findMany({
+		where: {
+			OR: [
+				{ name: { contains: searchText, mode: 'insensitive' } },
+				{ id: { equals: Number.isNaN(Number(searchText)) ? 0 : +searchText } },
+				{
+					Authors: {
+						some: { name: { contains: searchText, mode: 'insensitive' } },
+					},
+				},
+				{
+					Speciality: {
+						name: { contains: searchText, mode: 'insensitive' },
+					},
+					PubType: {
+						name: { contains: searchText, mode: 'insensitive' },
+					},
+				},
+			],
+		},
+		include: {
+			Authors: true,
+			Department: { include: { faculty: true } },
+			EducationForm: true,
+			PubSubType: true,
+			PubType: true,
+			Speciality: true,
+			Edit: { include: { Editor: true } },
+			Notes: true,
+			Mark: true,
+		},
+	})
 }
 
 export const updateService = async (data: PublicationUpdateDto) => {
@@ -137,5 +172,22 @@ export const updateService = async (data: PublicationUpdateDto) => {
 	return await prisma.publication.update({
 		where: { id },
 		data: updateData,
+	})
+}
+
+export const getByIdService = async (id: number) => {
+	return await prisma.publication.findFirst({
+		where: { id },
+		include: {
+			Authors: true,
+			Department: { include: { faculty: true } },
+			EducationForm: true,
+			PubSubType: true,
+			PubType: true,
+			Speciality: true,
+			Edit: { include: { Editor: true } },
+			Notes: true,
+			Mark: true,
+		},
 	})
 }

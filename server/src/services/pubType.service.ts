@@ -2,7 +2,11 @@ import { prisma } from '../../prisma'
 
 export const addNewPubTypes = async () => {
 	return await prisma.pubType.createMany({
-		data: [{ name: 'УМД' }],
+		data: [
+			// { name: 'УМД' },
+			{ name: 'ЭУМД' },
+			{ name: 'ЭИ' },
+		],
 	})
 }
 

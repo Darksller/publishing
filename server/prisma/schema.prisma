@@ -37,7 +37,7 @@ model Role {
 
 model Plan {
   id           Int           @id @default(autoincrement())
-  year         Int
+  year         Int           @unique
   Publications Publication[]
 }
 
@@ -106,7 +106,7 @@ model Publication {
   plannedDueDate  String
   departmentId    Int
   Department      Department    @relation(fields: [departmentId], references: [id])
-  Plan            Plan          @relation(fields: [planId], references: [id])
+  Plan            Plan          @relation(fields: [planId], references: [id], onDelete: Cascade)
   planId          Int
   actualAmount    Int?
   actualDueDate   String?

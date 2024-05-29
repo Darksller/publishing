@@ -3,18 +3,31 @@ import { Publication as PubType } from '@/entities/publication'
 import { PublicationEditForm } from '@/features/edit-publication/ui/form'
 import { Roles } from '@/shared/lib/constantRoles'
 import { getCalendarDate, getMonthYear, getQuarter } from '@/shared/lib/time'
+import { cn } from '@/shared/lib/utils'
 import { DialogWrapper } from '@/shared/ui/dialog-wrapper'
 import { Pencil1Icon } from '@radix-ui/react-icons'
 import { useSelector } from 'react-redux'
 
 type PublicationProps = {
 	data: PubType
+	hide?: boolean
 }
-export const Publication = ({ data }: PublicationProps) => {
+export const Publication = ({ data, hide = false }: PublicationProps) => {
 	const role = useSelector((state: RootState) => state.viewer.user?.role.name)
+
 	return (
-		<div className='flex flex-col gap-8 border border-primary p-4 '>
-			<div className='flex'>
+		<div
+			className={cn(
+				'flex flex-col gap-8 border-4 border-primary p-4 ',
+				data.actualDueDate &&
+					new Date(data.actualDueDate) <= new Date(data.plannedDueDate) &&
+					'bg-purple-400/30',
+				data.actualDueDate &&
+					new Date(data.actualDueDate) > new Date(data.plannedDueDate) &&
+					'bg-red-400/30'
+			)}
+		>
+			<div className='flex gap-2'>
 				<div className='flex flex-col border py-1 gap-1 w-fit'>
 					<div className='px-2 font-bold'>Дата добавления</div>
 					<div className='border-2' />
@@ -22,7 +35,18 @@ export const Publication = ({ data }: PublicationProps) => {
 						{getCalendarDate(new Date(data.dateAdded))}
 					</div>
 				</div>
-				{(role === Roles.ED || role === Roles.ADMIN) && (
+				<div className='flex flex-col border py-1 gap-1 w-fit'>
+					<div className='px-2 font-bold'>Тип издания</div>
+					<div className='border-2' />
+					<div className='px-2 text-center'>{data.pubType}</div>
+				</div>
+
+				<div className='flex flex-col m-auto font-bold text-base'>
+					<div>Фиолетовый фон - работа сдана в срок</div>
+					<div>Без фона - работа не сдана</div>
+					<div>Красный фон - работа сдана, но не в срок</div>
+				</div>
+				{(role === Roles.Head || role === Roles.ADMIN) && !hide && (
 					<DialogWrapper
 						className='ml-auto flex justify-center items-center border px-3 hover:bg-primary hover:text-secondary duration-300 cursor-pointer'
 						content={<PublicationEditForm data={data} />}
@@ -30,6 +54,7 @@ export const Publication = ({ data }: PublicationProps) => {
 					/>
 				)}
 			</div>
+
 			<div className='flex gap-2'>
 				<div className='flex flex-col border py-1 gap-1'>
 					<div className='px-2 font-bold'>№ Заказа</div>
@@ -109,7 +134,7 @@ export const Publication = ({ data }: PublicationProps) => {
 					{getQuarter(data.plannedDueDate)}
 				</div>
 				<div className='col-span-1 row-span-1 row-start-3 col-start-7 border p-4'>
-					{data.actualDueDate && getQuarter(data.actualDueDate)}
+					{data.actualDueDate}
 				</div>
 				<div className='col-span-1 row-span-2 col-start-8 border p-4 flex justify-center items-center font-bold'>
 					Гриф
@@ -123,7 +148,7 @@ export const Publication = ({ data }: PublicationProps) => {
 				<div className='p-4 text-base flex flex-col gap-4'>
 					<div className='font-bold'>Примечания</div>
 					{data.notes?.map((item, index) => (
-						<div>
+						<div key={index}>
 							{index + 1}. {item}
 						</div>
 					))}

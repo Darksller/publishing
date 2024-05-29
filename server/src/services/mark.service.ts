@@ -2,12 +2,14 @@ import { prisma } from '../../prisma'
 
 export const addNewService = async () => {
 	return await prisma.mark.createMany({
-		data: [{ name: 'УФО' }],
+		data: [{ name: 'МинОбр' }],
 	})
 }
 
 export const getAllService = async () => {
-	return await prisma.mark.findMany()
+	return await prisma.mark.findMany({
+		include: { Publication: { include: { Plan: true } } },
+	})
 }
 
 export const getMark = async (name: string) => {

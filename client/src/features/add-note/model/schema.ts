@@ -16,7 +16,7 @@ export const Schema = z.object({
 	plannedDueDate: z.string().min(1, { message: 'Выберите дату' }),
 	department: z.string(),
 	dateAdded: z.string(),
-	copies: z
+	copies: z.coerce
 		.number()
 		.min(1, { message: 'Тираж должен составлять значение больше 0' }),
 })

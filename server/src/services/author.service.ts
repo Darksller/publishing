@@ -5,11 +5,20 @@ export const addNewService = async () => {
 	// const dep = await getDepartment('Высшая математика')
 	// const dep1 = await getDepartment('Информатика')
 	// const dep2 = await getDepartment('Информационные технологии')
-	const dep = await getDepartment('Маркетинг и отраслевая экономика')
+	const dep = await getDepartment('Механика')
+	const dep1 = await getDepartment(
+		'Металлургия и технологии обработки материалов'
+	)
+	// const dep = await getDepartment('Автоматизированный электропривод')
+	// const dep = await getDepartment('Маркетинг и отраслевая экономика')
 	return await prisma.author.createMany({
 		data: [
-			{ name: 'Соловьева Л.Л.', departmentId: dep!.id },
-			{ name: 'Карчевская Е.Н.', departmentId: dep!.id },
+			// { name: 'Брель В.В.', departmentId: dep!.id },
+			// { name: 'Веппер Л.В.', departmentId: dep!.id },
+			{ name: 'Лапко О.А.', departmentId: dep!.id },
+			{ name: 'Рюмцев А.А.', departmentId: dep!.id },
+			{ name: 'Герасимова О.В.', departmentId: dep1!.id },
+			{ name: 'Швецов А.Н.', departmentId: dep1!.id },
 			// { name: 'Бабич А.А.', departmentId: dep!.id },
 			// { name: 'Авакян Е.З.', departmentId: dep!.id },
 			// { name: 'Задорожнюк М.В.', departmentId: dep!.id },
@@ -25,6 +34,9 @@ export const addNewService = async () => {
 		],
 	})
 }
+export const getAllAuthors = async () => {
+	return await prisma.author.findMany({ include: { Publication: true } })
+}
 
 export const getAuthorsByDepartment = async (faculty: string) => {
 	const dep = await prisma.department.findFirst({
@@ -32,4 +44,19 @@ export const getAuthorsByDepartment = async (faculty: string) => {
 		include: { Author: true },
 	})
 	return dep?.Author
+}
+
+export const getAuthorsWithOverduePublications = async () => {
+	const publication = await prisma.publication.findMany({
+		include: { Authors: true },
+	})
+	const filtered = publication.filter(
+		item => new Date(item.plannedAmount) < new Date() && !item.actualDueDate
+	)
+	const overdueAuthors = filtered.flatMap(publication => ({
+		authors: publication.Authors.map(item => item.name),
+		name: publication.name,
+		id: publication.id,
+	}))
+	return overdueAuthors
 }

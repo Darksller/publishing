@@ -18,7 +18,11 @@ export function SearchBar({ className, variant = 'default' }: SearchBarProps) {
 		setSearchText(event.target.value)
 	}
 	function onKeyPressed(event: React.KeyboardEvent<HTMLInputElement>): void {
-		// if (event.key === 'Enter') navigate({ to: {}, params: { searchText } })
+		if (event.key === 'Enter')
+			navigate({
+				to: '/search/$searchText',
+				params: { searchText: searchText },
+			})
 	}
 
 	return (
@@ -32,7 +36,15 @@ export function SearchBar({ className, variant = 'default' }: SearchBarProps) {
 						onChange={onSearchInputChange}
 						onKeyDown={onKeyPressed}
 					/>
-					<MagnifyingGlassIcon className='absolute my-1.5 mr-2 size-6 transition-all' />
+					<MagnifyingGlassIcon
+						className='absolute my-1.5 mr-2 size-6 transition-all cursor-pointer'
+						onClick={() =>
+							navigate({
+								to: '/search/$searchText',
+								params: { searchText: searchText },
+							})
+						}
+					/>
 				</div>
 			)}
 			{variant === 'default' && (

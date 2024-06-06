@@ -1,6 +1,6 @@
 import { prisma } from '../../prisma'
 
-export const getAllYearsService = async () => {
+export const getAllYearsRepository = async () => {
 	const plans = await prisma.plan.findMany()
 	return plans.map(item => item.year)
 }

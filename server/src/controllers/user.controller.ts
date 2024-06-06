@@ -9,10 +9,11 @@ import jwt from 'jsonwebtoken'
 import { createUser, getUserByEmail } from '../repositories/user.repository'
 import { UserDTO } from '../repositories/dto/user.dto'
 import { createToken, updateToken } from '../repositories/token.repository'
+import { getAllService } from '../services/user.service'
 
 export const getAll = async (req: express.Request, res: express.Response) => {
 	try {
-		const users = await getAllUsers()
+		const users = await getAllService()
 		return res.status(200).json(users).end()
 	} catch (error) {
 		console.log(error)

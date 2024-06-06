@@ -1,5 +1,6 @@
 import { prisma } from '../../prisma'
 import { getDepartment } from './department.repository'
+import { getAllPublications } from './publication.repository'
 
 export const addNewService = async () => {
 	// const dep = await getDepartment('Высшая математика')
@@ -38,7 +39,9 @@ export const addNewService = async () => {
 export const getAllAuthors = async () => {
 	return await prisma.author.findMany({
 		include: {
-			Publication: { include: { Department: { include: { faculty: true } } } },
+			Publication: {
+				include: { Department: { include: { faculty: true } }, Authors: true },
+			},
 		},
 	})
 }
@@ -49,19 +52,4 @@ export const getAuthorsByDepartment = async (faculty: string) => {
 		include: { Author: true },
 	})
 	return dep?.Author
-}
-
-export const getAuthorsWithOverduePublications = async () => {
-	const publication = await prisma.publication.findMany({
-		include: { Authors: true },
-	})
-	const filtered = publication.filter(
-		item => new Date(item.plannedDueDate) < new Date() && !item.actualDueDate
-	)
-	const overdueAuthors = filtered.flatMap(publication => ({
-		authors: publication.Authors.map(item => item.name),
-		name: publication.name,
-		id: publication.id,
-	}))
-	return overdueAuthors
 }

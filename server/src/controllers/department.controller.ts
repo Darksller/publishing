@@ -1,8 +1,5 @@
 import express from 'express'
-import {
-	addNewDepartments,
-	getDepartmentsByFaculty,
-} from '../repositories/department.repository'
+import { getByFacultyNameService } from '../services/department.service'
 
 export const getByFacultyName = async (
 	req: express.Request,
@@ -10,7 +7,7 @@ export const getByFacultyName = async (
 ) => {
 	try {
 		const { faculty } = req.params
-		const departments = await getDepartmentsByFaculty(faculty)
+		const departments = await getByFacultyNameService(faculty)
 		return res.status(200).json(departments).end()
 	} catch (error) {
 		console.log(error)

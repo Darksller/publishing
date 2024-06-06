@@ -10,7 +10,7 @@ export const addNewService = async () => {
 	})
 }
 
-export const getAllService = async () => {
+export const getAllRepository = async () => {
 	return await prisma.educationForm.findMany()
 }
 

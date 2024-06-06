@@ -1,7 +1,11 @@
 import express from 'express'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { Roles } from '../utils/roles'
-import { getVerifiedUser, isUserValid, validateToken } from '../utils/auth.util'
+import {
+	getVerifiedUser,
+	isUserValid,
+	validateToken,
+} from '../services/auth.service'
 import status from 'http-status'
 
 export const credentials = (

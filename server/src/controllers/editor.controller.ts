@@ -1,9 +1,9 @@
 import express from 'express'
-import { addNewService, getAllService } from '../repositories/editor.repository'
+import { getAllRepository } from '../repositories/educationForm.repository'
 
 export const getAll = async (req: express.Request, res: express.Response) => {
 	try {
-		const data = await getAllService()
+		const data = await getAllRepository()
 		return res.status(200).json(data).end()
 	} catch (error) {
 		console.log(error)

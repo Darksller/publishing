@@ -12,7 +12,7 @@ import {
 	getVerifiedUser,
 	isUserValid,
 	validateToken,
-} from '../utils/auth.util'
+} from '../services/auth.service'
 
 export const login = async (req: express.Request, res: express.Response) => {
 	try {

@@ -1,9 +1,9 @@
 import express from 'express'
-import { getAllRoles } from '../repositories/role.repository'
+import { getAllService } from '../services/role.service'
 
 export const getAll = async (req: express.Request, res: express.Response) => {
 	try {
-		const roles = await getAllRoles()
+		const roles = await getAllService()
 		return res.status(200).json(roles).end()
 	} catch (error) {
 		console.log(error)

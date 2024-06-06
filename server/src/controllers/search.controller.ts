@@ -1,11 +1,11 @@
 import express from 'express'
-import { searchPublications } from '../repositories/publication.repository'
+import { searchService } from '../services/search.service'
 
 export const search = async (req: express.Request, res: express.Response) => {
 	try {
 		const { searchText } = req.params
 
-		const data = await searchPublications(searchText)
+		const data = await searchService(searchText)
 		if (!data) return res.status(200).json([]).end()
 		const publicationsAsStrings = data.map(publication => {
 			return {

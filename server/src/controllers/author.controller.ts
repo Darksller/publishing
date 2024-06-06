@@ -1,15 +1,13 @@
 import express from 'express'
 import {
-	addNewService,
-	getAuthorsByDepartment,
 	getAuthorsWithOverduePublications,
-} from '../repositories/author.repository'
+	getByDepartment,
+} from '../services/author.service'
 
 export const getByDep = async (req: express.Request, res: express.Response) => {
 	try {
 		const { dep } = req.params
-		//await addNewService()
-		const authors = await getAuthorsByDepartment(dep)
+		const authors = await getByDepartment(dep)
 
 		return res.status(200).json(authors).end()
 	} catch (error) {

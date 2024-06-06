@@ -1,13 +1,9 @@
 import express from 'express'
-import {
-	addNewSubPubTypes,
-	getPubSubTypes,
-} from '../repositories/pubSubType.repository'
+import { getAllService } from '../services/pubSubType.service'
 
 export const getAll = async (req: express.Request, res: express.Response) => {
 	try {
-		const data = await getPubSubTypes()
-
+		const data = await getAllService()
 		return res.status(200).json(data).end()
 	} catch (error) {
 		console.log(error)

@@ -46,7 +46,7 @@ export const addNewService = async (
 }
 
 export const getAllPublications = async () => {
-	return await prisma.publication.findMany()
+	return await prisma.publication.findMany({ include: { Authors: true } })
 }
 
 export const searchPublications = async (searchText: string) => {
@@ -182,7 +182,7 @@ export const updateService = async (data: PublicationUpdateDto) => {
 	})
 }
 
-export const getByIdService = async (id: number) => {
+export const getByIdRepository = async (id: number) => {
 	return await prisma.publication.findFirst({
 		where: { id },
 		include: {

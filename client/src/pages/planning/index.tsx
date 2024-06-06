@@ -1,4 +1,4 @@
-import { Faculty } from '@/widgets/ed'
+import { Faculty } from '@/widgets/planning'
 import { useFaculty } from '@/features/planning/faculty/'
 import { AddFaculty } from '@/features/add-note/'
 import { CreatePlan } from '@/features/add-note/ui/create-plan-block'

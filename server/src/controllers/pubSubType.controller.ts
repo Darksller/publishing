@@ -2,7 +2,7 @@ import express from 'express'
 import {
 	addNewSubPubTypes,
 	getPubSubTypes,
-} from '../services/pubSubType.service'
+} from '../repositories/pubSubType.repository'
 
 export const getAll = async (req: express.Request, res: express.Response) => {
 	try {

@@ -1,5 +1,8 @@
 import express from 'express'
-import { addNewService, getAllService } from '../services/educationForm.service'
+import {
+	addNewService,
+	getAllService,
+} from '../repositories/educationForm.repository'
 
 export const getAll = async (req: express.Request, res: express.Response) => {
 	try {

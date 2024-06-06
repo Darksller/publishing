@@ -1,8 +1,8 @@
 import express from 'express'
-import { getAllAuthors } from '../services/author.service'
+import { getAllAuthors } from '../repositories/author.repository'
 import { getRandomColor } from '../utils/color'
-import { getAllSpecialities } from '../services/speciality.service'
-import { getAllPlans } from '../services/plan.service'
+import { getAllSpecialities } from '../repositories/speciality.repository'
+import { getAllPlans } from '../repositories/plan.repository'
 
 export const getLine = async (req: express.Request, res: express.Response) => {
 	try {

@@ -1,5 +1,5 @@
 import express from 'express'
-import { addNewPubTypes, getPubTypes } from '../services/pubType.service'
+import { addNewPubTypes, getPubTypes } from '../repositories/pubType.repository'
 
 export const getAll = async (req: express.Request, res: express.Response) => {
 	try {

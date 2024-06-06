@@ -3,7 +3,7 @@ import {
 	addNewService,
 	getAuthorsByDepartment,
 	getAuthorsWithOverduePublications,
-} from '../services/author.service'
+} from '../repositories/author.repository'
 
 export const getByDep = async (req: express.Request, res: express.Response) => {
 	try {

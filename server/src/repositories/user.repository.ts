@@ -1,7 +1,7 @@
 import { prisma } from '../../prisma'
-import { UserDTO } from '../dto/user.dto'
+import { UserDTO } from './dto/user.dto'
 import { generatePasswordHash } from '../utils'
-import { getByNameRole } from './role.service'
+import { getByNameRole } from './role.repository'
 
 export const getUserByEmail = async (email: string) => {
 	return await prisma.user.findFirst({

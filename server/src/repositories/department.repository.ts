@@ -1,5 +1,5 @@
 import { prisma } from '../../prisma'
-import { getFaculty } from './faculty.service'
+import { getFaculty } from './faculty.repository'
 
 export const addNewDepartments = async () => {
 	const fais = await getFaculty(

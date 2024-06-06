@@ -1,5 +1,5 @@
 import express from 'express'
-import { searchPublications } from '../services/publication.service'
+import { searchPublications } from '../repositories/publication.repository'
 
 export const search = async (req: express.Request, res: express.Response) => {
 	try {

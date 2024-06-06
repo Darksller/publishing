@@ -1,12 +1,12 @@
 import { prisma } from '../../prisma'
-import { PublicationDto, PublicationUpdateDto } from '../dto/publication.dto'
-import { getDepartment } from './department.service'
-import { getEditor, getEditorId } from './editor.service'
-import { getEducationForm } from './educationForm.service'
-import { getMark } from './mark.service'
-import { getPubSubType } from './pubSubType.service'
-import { getPubType } from './pubType.service'
-import { getSpeciality } from './speciality.service'
+import { PublicationDto, PublicationUpdateDto } from './dto/publication.dto'
+import { getDepartment } from './department.repository'
+import { getEditor, getEditorId } from './editor.repository'
+import { getEducationForm } from './educationForm.repository'
+import { getMark } from './mark.repository'
+import { getPubSubType } from './pubSubType.repository'
+import { getPubType } from './pubType.repository'
+import { getSpeciality } from './speciality.repository'
 
 export const addNewService = async (
 	publication: PublicationDto,

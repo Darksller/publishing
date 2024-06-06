@@ -1,5 +1,5 @@
 import express from 'express'
-import { getAllFaculties } from '../services/faculty.service'
+import { getAllFaculties } from '../repositories/faculty.repository'
 
 export const getAll = async (req: express.Request, res: express.Response) => {
 	try {

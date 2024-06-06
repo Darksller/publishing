@@ -1,10 +1,14 @@
 import express from 'express'
-import { deleteUser, getAllUsers, updateUser } from '../services/user.service'
+import {
+	deleteUser,
+	getAllUsers,
+	updateUser,
+} from '../repositories/user.repository'
 import { generateSalt } from '../utils'
 import jwt from 'jsonwebtoken'
-import { createUser, getUserByEmail } from '../services/user.service'
-import { UserDTO } from '../dto/user.dto'
-import { createToken, updateToken } from '../services/token.service'
+import { createUser, getUserByEmail } from '../repositories/user.repository'
+import { UserDTO } from '../repositories/dto/user.dto'
+import { createToken, updateToken } from '../repositories/token.repository'
 
 export const getAll = async (req: express.Request, res: express.Response) => {
 	try {

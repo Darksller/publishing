@@ -1,8 +1,11 @@
 import express from 'express'
 import { compare, generateSalt } from '../utils'
 import jwt, { JwtPayload } from 'jsonwebtoken'
-import { getUserByEmail, updateLoginDate } from '../services/user.service'
-import { updateToken } from '../services/token.service'
+import {
+	getUserByEmail,
+	updateLoginDate,
+} from '../repositories/user.repository'
+import { updateToken } from '../repositories/token.repository'
 import status from 'http-status'
 import {
 	generateAccessToken,

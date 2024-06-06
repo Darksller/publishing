@@ -2,7 +2,7 @@ import express from 'express'
 import {
 	addNewService,
 	getAllSpecialities,
-} from '../services/speciality.service'
+} from '../repositories/speciality.repository'
 
 export const getAll = async (req: express.Request, res: express.Response) => {
 	try {

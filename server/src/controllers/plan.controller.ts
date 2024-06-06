@@ -3,14 +3,17 @@ import {
 	createPlan,
 	getAllYearsService,
 	getService,
-} from '../services/plan.service'
-import { PublicationDto, PublicationUpdateDto } from '../dto/publication.dto'
+} from '../repositories/plan.repository'
+import {
+	PublicationDto,
+	PublicationUpdateDto,
+} from '../repositories/dto/publication.dto'
 import {
 	addNewService,
 	deleteById,
 	getByIdService,
 	updateService,
-} from '../services/publication.service'
+} from '../repositories/publication.repository'
 import httpStatus from 'http-status'
 
 export const getAllYears = async (

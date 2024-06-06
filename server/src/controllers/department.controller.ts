@@ -2,7 +2,7 @@ import express from 'express'
 import {
 	addNewDepartments,
 	getDepartmentsByFaculty,
-} from '../services/department.service'
+} from '../repositories/department.repository'
 
 export const getByFacultyName = async (
 	req: express.Request,

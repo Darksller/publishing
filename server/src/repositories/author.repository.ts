@@ -1,5 +1,5 @@
 import { prisma } from '../../prisma'
-import { getDepartment } from './department.service'
+import { getDepartment } from './department.repository'
 
 export const addNewService = async () => {
 	// const dep = await getDepartment('Высшая математика')
@@ -34,6 +34,7 @@ export const addNewService = async () => {
 		],
 	})
 }
+
 export const getAllAuthors = async () => {
 	return await prisma.author.findMany({
 		include: {

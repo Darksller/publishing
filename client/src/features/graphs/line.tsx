@@ -1,4 +1,3 @@
-import { useGetLineQuery } from './api'
 import { Line } from 'react-chartjs-2'
 import {
 	Chart as ChartJS,
@@ -10,8 +9,7 @@ import {
 	Tooltip,
 	Legend,
 } from 'chart.js'
-import { Loading } from '@/shared/ui/loading'
-
+import type { Line as LineType } from './types'
 ChartJS.register(
 	CategoryScale,
 	LinearScale,
@@ -22,8 +20,10 @@ ChartJS.register(
 	Legend
 )
 
-export const LineChart = () => {
-	const { data } = useGetLineQuery()
-	if (!data) return <Loading />
+type Props = {
+	data: LineType
+}
+
+export const LineChart = ({ data }: Props) => {
 	return <Line data={data} />
 }

@@ -6,7 +6,23 @@ export const getAllYearsService = async () => {
 }
 
 export const getAllPlans = async () => {
-	return await prisma.plan.findMany({ include: { Publications: true } })
+	return await prisma.plan.findMany({
+		include: {
+			Publications: {
+				include: {
+					Authors: true,
+					Department: { include: { faculty: true } },
+					EducationForm: true,
+					PubSubType: true,
+					PubType: true,
+					Speciality: true,
+					Edit: { include: { Editor: true } },
+					Notes: true,
+					Mark: true,
+				},
+			},
+		},
+	})
 }
 
 export const createPlan = async (year: number) => {

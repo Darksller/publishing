@@ -22,7 +22,7 @@ export const SearchPage = () => {
 	if (!data) return <Loading />
 
 	return (
-		<div className='flex flex-col gap-4'>
+		<div className='flex flex-col gap-2 '>
 			<div className='m-auto tracking-widest text-3xl '>Поиск</div>
 			{data.length === 0 && (
 				<div className='m-auto tracking-widest text-3xl'>

@@ -40,6 +40,13 @@ export const planApi = api.injectEndpoints({
 			}),
 			invalidatesTags: ['publication'],
 		}),
+		deletePub: build.mutation({
+			query: body => ({
+				url: `/pub/${body}`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: ['publication'],
+		}),
 	}),
 })
 
@@ -49,4 +56,5 @@ export const {
 	useLazyGetByYearQuery,
 	useUpdatePublicationMutation,
 	useLazyGetByIdQuery,
+	useDeletePubMutation,
 } = planApi

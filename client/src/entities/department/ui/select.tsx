@@ -20,12 +20,12 @@ export const DepartmentSelect = ({
 	const { data } = useGetDepartmentByFacultyQuery(faculty)
 	return (
 		<Select onValueChange={onValueChange} defaultValue={defaultValue}>
-			<SelectTrigger className='text-md'>
+			<SelectTrigger>
 				<SelectValue placeholder='Выберите кафедру' />
 			</SelectTrigger>
 			<SelectContent className='px-1 py-1'>
 				{data?.map(role => (
-					<SelectItem key={role.id} value={role.name} className='text-md'>
+					<SelectItem key={role.id} value={role.name}>
 						{role.name}
 					</SelectItem>
 				))}

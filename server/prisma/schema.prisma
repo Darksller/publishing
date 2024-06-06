@@ -19,6 +19,7 @@ model User {
   Token  Token?
   roleId Int
   role   Role   @relation(fields: [roleId], references: [id])
+  Plan   Plan[]
 }
 
 model Token {
@@ -39,6 +40,8 @@ model Plan {
   id           Int           @id @default(autoincrement())
   year         Int           @unique
   Publications Publication[]
+  userId       Int?
+  User         User?         @relation(fields: [userId], references: [id])
 }
 
 model Faculty {

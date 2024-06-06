@@ -5,11 +5,9 @@ export const Schema = z.object({
 	plannedAmount: z.coerce
 		.number()
 		.min(1, { message: 'Плановый объем должен быть больше 0' }),
-	actualAmount: z.coerce
-		.number()
-		.min(1, { message: 'Действительный объем должен быть больше 0' }),
+	actualAmount: z.coerce.number(),
 	plannedDueDate: z.string().min(1, { message: 'Выберите дату' }),
-	actualDueDate: z.string().min(1, { message: 'Выберите дату' }),
+	actualDueDate: z.string(),
 	mark: z.string().nullable().optional(),
 	editor: z.string().nullable().optional(),
 	startDate: z.string().nullable().optional(),

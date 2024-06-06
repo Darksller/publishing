@@ -64,7 +64,14 @@ export const searchPublications = async (searchText: string) => {
 					Speciality: {
 						name: { contains: searchText, mode: 'insensitive' },
 					},
+				},
+				{
 					PubType: {
+						name: { contains: searchText, mode: 'insensitive' },
+					},
+				},
+				{
+					EducationForm: {
 						name: { contains: searchText, mode: 'insensitive' },
 					},
 				},
@@ -103,9 +110,9 @@ export const updateService = async (data: PublicationUpdateDto) => {
 
 	const updateData: {
 		plannedAmount: number
-		actualAmount: number
+		actualAmount: number | undefined
 		plannedDueDate: string
-		actualDueDate: string
+		actualDueDate: string | null | undefined
 		signatureDate: string | null | undefined
 		releaseDate: string | null | undefined
 		transferDate: string | null | undefined
@@ -190,4 +197,8 @@ export const getByIdService = async (id: number) => {
 			Mark: true,
 		},
 	})
+}
+
+export const deleteById = async (id: number) => {
+	await prisma.publication.delete({ where: { id } })
 }

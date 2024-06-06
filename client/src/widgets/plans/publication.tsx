@@ -1,11 +1,13 @@
 import { RootState } from '@/app/store'
+import { useDeletePubMutation } from '@/entities/plan'
 import { Publication as PubType } from '@/entities/publication'
 import { PublicationEditForm } from '@/features/edit-publication/ui/form'
 import { Roles } from '@/shared/lib/constantRoles'
 import { getCalendarDate, getMonthYear, getQuarter } from '@/shared/lib/time'
 import { cn } from '@/shared/lib/utils'
+import { ConfirmDialog } from '@/shared/ui/confirm'
 import { DialogWrapper } from '@/shared/ui/dialog-wrapper'
-import { Pencil1Icon } from '@radix-ui/react-icons'
+import { Cross2Icon, Pencil1Icon } from '@radix-ui/react-icons'
 import { useSelector } from 'react-redux'
 
 type PublicationProps = {
@@ -14,7 +16,10 @@ type PublicationProps = {
 }
 export const Publication = ({ data, hide = false }: PublicationProps) => {
 	const role = useSelector((state: RootState) => state.viewer.user?.role.name)
-
+	const [del] = useDeletePubMutation()
+	const onDelete = async () => {
+		if (data.id) await del(data.id)
+	}
 	return (
 		<div
 			className={cn(
@@ -47,11 +52,22 @@ export const Publication = ({ data, hide = false }: PublicationProps) => {
 					<div>Красный фон - работа сдана, но не в срок</div>
 				</div>
 				{(role === Roles.Head || role === Roles.ADMIN) && !hide && (
-					<DialogWrapper
-						className='ml-auto flex justify-center items-center border px-3 hover:bg-primary hover:text-secondary duration-300 cursor-pointer'
-						content={<PublicationEditForm data={data} />}
-						trigger={<Pencil1Icon className='size-6' />}
-					/>
+					<div className='flex ml-auto gap-2'>
+						<DialogWrapper
+							className='flex justify-center items-center border px-3 hover:bg-primary hover:text-secondary duration-300 cursor-pointer'
+							content={<PublicationEditForm data={data} />}
+							trigger={<Pencil1Icon className='size-6' />}
+						/>
+						{/* <ConfirmDialog
+							trigger={
+								<div className='flex justify-center items-center border px-3 hover:bg-primary hover:text-secondary duration-300 cursor-pointer'>
+									<Cross2Icon className='size-6' />
+								</div>
+							}
+							desc={'Вы уверены что хотите удалить публикацию?'}
+							onClick={onDelete}
+						/> */}
+					</div>
 				)}
 			</div>
 

@@ -7,12 +7,14 @@ import {
 	LinearScale,
 	BarElement,
 } from 'chart.js'
-import { useGetBarQuery } from './api'
-import { Loading } from '@/shared/ui/loading'
+import { Pie } from './types'
 
 ChartJS.register(Tooltip, Legend, CategoryScale, LinearScale, BarElement)
-export const BarChart = () => {
-	const { data } = useGetBarQuery()
-	if (!data) return <Loading />
+
+type Props = {
+	data: Pie
+}
+
+export const BarChart = ({ data }: Props) => {
 	return <Bar data={data} />
 }

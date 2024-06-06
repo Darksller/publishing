@@ -7,6 +7,7 @@ import {
 import { PublicationDto, PublicationUpdateDto } from '../dto/publication.dto'
 import {
 	addNewService,
+	deleteById,
 	getByIdService,
 	updateService,
 } from '../services/publication.service'
@@ -141,6 +142,20 @@ export const getByID = async (req: express.Request, res: express.Response) => {
 			mark: publication.Mark?.name,
 		}
 		return res.status(200).json(publicationsAsStrings).end()
+	} catch (error) {
+		console.log(error)
+		return res.sendStatus(400)
+	}
+}
+
+export const deletePub = async (
+	req: express.Request,
+	res: express.Response
+) => {
+	try {
+		const { id } = req.params
+		await deleteById(Number(id))
+		return res.sendStatus(200)
 	} catch (error) {
 		console.log(error)
 		return res.sendStatus(400)

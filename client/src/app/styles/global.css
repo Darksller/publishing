@@ -53,6 +53,7 @@
 @layer base {
   * {
     @apply border-border;
+    @apply scrollbar-thin;
   }
 
   body {

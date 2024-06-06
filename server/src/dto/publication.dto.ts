@@ -15,9 +15,9 @@ export type PublicationDto = {
 export type PublicationUpdateDto = {
 	id: number
 	plannedAmount: number
-	actualAmount: number
+	actualAmount?: number
 	plannedDueDate: string
-	actualDueDate: string
+	actualDueDate: string | null
 	mark?: string | null
 	editor?: string
 	startDate?: string | null

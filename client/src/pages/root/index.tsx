@@ -33,17 +33,22 @@ export const Root = () => {
 
 	if (!isAuthenticated) return <GuestPage />
 	return (
-		<div className='font-inter flex flex-col min-h-screen '>
-			<Headroom className='mt-1 '>
-				<Header />
-			</Headroom>
-			<div className='flex flex-grow'>
-				<OverdueBar />
-				<div className='w-full mx-auto max-w-[1440px] rounded-2xl my-10 border px-4 py-4 shadow-lg dark:shadow-secondary flex-grow'>
-					<Outlet />
+		<>
+			<div className={'font-inter flex flex-col min-h-screen max-md:hidden'}>
+				<Headroom className='mt-1 '>
+					<Header />
+				</Headroom>
+				<div className='flex flex-grow'>
+					<OverdueBar />
+					<div className='w-full mx-auto max-w-[1440px] rounded-2xl my-10 border px-4 py-4 shadow-lg dark:shadow-secondary flex-grow '>
+						<Outlet />
+					</div>
 				</div>
+				<Toaster />
 			</div>
-			<Toaster />
-		</div>
+			<div className='md:hidden text-center text-3xl flex items-center justify-center h-dvh font-bold'>
+				Устройство не поддерживается
+			</div>
+		</>
 	)
 }

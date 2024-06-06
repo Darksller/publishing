@@ -1,22 +1,23 @@
 import express from 'express'
 import { authRouter } from './auth.router'
-import { roleRouter } from './role.router'
-import { userRouter } from './user.router'
-import { facultyRouter } from './faculty.router'
+import { authorRouter } from './author.router'
 import { departmentRouter } from './department.router'
-import { pubTypeRouter } from './pubType.r'
-import { pubSubTypeRouter } from './pubSubType.r'
-import { specialityRouter } from './speciality.r'
-import { educationFormRouter } from './educationForm.r'
-import { authorRouter } from './author.r'
+import { editorRouter } from './editor.router'
+import { educationFormRouter } from './educationForm.router'
+import { facultyRouter } from './faculty.router'
+import { markRouter } from './mark.router'
 import { planRouter } from './plan.router'
-import { markRouter } from './mark.r'
-import { editorRouter } from './editor.r'
-import { searchRouter } from './search.r'
-
+import { pubSubTypeRouter } from './pubSubType.router'
+import { pubTypeRouter } from './pubType.router'
+import { roleRouter } from './role.router'
+import { searchRouter } from './search.router'
+import { specialityRouter } from './speciality.router'
+import { statsRouter } from './stats.router'
+import { userRouter } from './user.router'
 const router = express.Router()
 
 export default (): express.Router => {
+	statsRouter(router)
 	authRouter(router)
 	roleRouter(router)
 	userRouter(router)

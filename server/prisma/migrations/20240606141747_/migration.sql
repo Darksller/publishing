@@ -1,0 +1,9 @@
+-- DropForeignKey
+ALTER TABLE "Plan" DROP CONSTRAINT "Plan_userId_fkey";
+
+-- AlterTable
+ALTER TABLE "Plan" ALTER COLUMN "userId" DROP NOT NULL,
+ALTER COLUMN "userId" DROP DEFAULT;
+
+-- AddForeignKey
+ALTER TABLE "Plan" ADD CONSTRAINT "Plan_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
